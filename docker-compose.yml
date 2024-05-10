@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  noobie-db:
+    image: postgres:16.1-alpine
+    ports:
+      - ${DB_READ_PORT}:5432
+    expose:
+      - ${DB_READ_PORT}
+    environment:
+      POSTGRES_USER: ${DB_READ_USERNAME}
+      POSTGRES_PASSWORD: ${DB_READ_PASSWORD}
+      POSTGRES_DB: ${DB_READ_NAME}
+    volumes:
+      - ./apps/db/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - noobie
+
+networks:
+  noobie:
