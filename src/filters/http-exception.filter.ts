@@ -82,7 +82,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       statusCode: status,
       timestamp: new Date().toString(),
       path: request.url,
-      message: msg || 'Something went wrong',
+      message: msg || exception.message || 'Something went wrong',
       host: request.headers.host,
       response: resError,
     };
